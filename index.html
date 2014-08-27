@@ -1,8 +1,7 @@
 <head>
   <script type="text/javascript" src="readInFile.js"></script>
   <script>
-    // var text;
-    // var cards;
+    var rowCounts = new Array(), colCounts = new Array();
     window.onload=function()
     {
       readTextFile("problem1input.txt");
@@ -18,19 +17,38 @@
         }
       }
       alert(cards[1][1]);
+      
+      
+      //looping to count blanks
       for(var i=0; i<cards.length;i++)
       {
+        rowCounts[i] = 0;
         var rowText = "";
         for(var j=0; j<cards[i].length;j++)
         {
+          if(i == 0)
+          {
+            colCounts[j] = 0;
+          }
           rowText += "["+cards[i][j] + "]";
+          if(cards[i][j]=="*")
+          {
+            rowCounts[i]++; 
+            colCounts[j]++;
+          }
         }
+        rowText = rowText + " "+ rowCounts[i] 
         var para = document.createElement("p");
         var node = document.createTextNode(rowText);
         para.appendChild(node);
         var element = document.getElementById("main");
         element.appendChild(para);
       }
+      var para2 = document.createElement("p");
+      var node2 = document.createTextNode(colCounts);
+      para2.appendChild(node2);
+      var element2 = document.getElementById("main");
+      element2.appendChild(para2);
     };
   </script>
 </head>
