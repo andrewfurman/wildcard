@@ -1,35 +1,40 @@
 <head>
+  <script type="text/javascript" src="readInFile.js"></script>
   <script>
-    var text;
-    
+    // var text;
+    // var cards;
     window.onload=function()
     {
-      alert("hello");
       readTextFile("problem1input.txt");
-      alert(text);
-    };
     
-    function readTextFile(file)
-    {
-      var rawFile = new XMLHttpRequest();
-      rawFile.open("GET", file, false);
-      rawFile.onreadystatechange = function ()
+      var cards = text.split('\n');
+      for(var line = 0; line < cards.length; line++)
       {
-        if(rawFile.readyState === 4)
+        var row = cards[line];
+        console.log(row);
+        for(var char = 0; char < row.length; char++)
         {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                text = allText;
-                alert(allText);
-            }
+          cards[line][char] = row.substring(char,char);
         }
       }
-      rawFile.send(null);
-    }
+      alert(cards[1][1]);
+      for(var i=0; i<cards.length;i++)
+      {
+        var rowText = "";
+        for(var j=0; j<cards[i].length;j++)
+        {
+          rowText += "["+cards[i][j] + "]";
+        }
+        var para = document.createElement("p");
+        var node = document.createTextNode(rowText);
+        para.appendChild(node);
+        var element = document.getElementById("main");
+        element.appendChild(para);
+      }
+    };
   </script>
-  
 </head>
 <body>
   <H1>Trying to solve the cards!</H1>
+  <p id="main"></p>
 </body>
