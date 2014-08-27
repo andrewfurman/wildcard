@@ -15,3 +15,10 @@
       }
       rawFile.send(null);
     }
+    
+    function factorial(num,min)
+    {
+      if(num == min)
+        return 1;
+      return num * factorial(num-1,min);
+    }

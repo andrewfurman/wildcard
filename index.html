@@ -16,8 +16,6 @@
           cards[line][char] = row.substring(char,char);
         }
       }
-      alert(cards[1][1]);
-      
       
       //looping to count blanks
       for(var i=0; i<cards.length;i++)
@@ -37,18 +35,37 @@
             colCounts[j]++;
           }
         }
-        rowText = rowText + " "+ rowCounts[i] 
-        var para = document.createElement("p");
-        var node = document.createTextNode(rowText);
-        para.appendChild(node);
-        var element = document.getElementById("main");
-        element.appendChild(para);
+        // rowText = rowText + " "+ rowCounts[i] 
+        // var para = document.createElement("p");
+        // var node = document.createTextNode(rowText);
+        // para.appendChild(node);
+        // var element = document.getElementById("main");
+        // element.appendChild(para);
       }
-      var para2 = document.createElement("p");
-      var node2 = document.createTextNode(colCounts);
-      para2.appendChild(node2);
-      var element2 = document.getElementById("main");
-      element2.appendChild(para2);
+      
+      var total = 0;
+      var rowCombos = new Array();
+      for(var i=0; i<rowCounts.length;i++)
+      {
+        if(rowCounts[i]>4)
+        {
+          rowCombos[i] = factorial(rowCounts[i],rowCounts[i]-5);
+          total += rowCombos[i];
+        }
+      }
+      document.getElementById("main").innerHTML += rowCounts+"<br/>"+rowCombos
+      
+      var colCombos = new Array();
+      for(var i=0; i<rowCounts.length;i++)
+      {
+        if(colCounts[i]>4)
+        {
+          colCombos[i] = factorial(colCounts[i],colCounts[i]-5);
+          total += colCombos[i];
+        }
+      }
+      document.getElementById("main").innerHTML += "<br/><br/>"+rowCounts+"<br/>"+colCombos
+      document.getElementById("main").innerHTML += "<br/><br/>"+total
     };
   </script>
 </head>
